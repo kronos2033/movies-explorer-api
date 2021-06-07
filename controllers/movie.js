@@ -5,7 +5,7 @@ const ValidateError = require('../errors/ValidateError');
 
 module.exports.getMovies = (req, res, next) => {
   Movie.find({})
-    .then((movies) => res.send(movies))
+    .then((movies) => res.status(200).send(movies))
     .catch(next);
 };
 
@@ -35,8 +35,9 @@ module.exports.createMovie = (req, res, next) => {
     nameEN,
     thumbnail,
     movieId,
+    owner: req.user._id,
   })
-    .then((movie) => res.send(movie))
+    .then((movie) => res.status(200).send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
         next(new ValidateError('Неверный формат введенных данных'));
@@ -47,15 +48,14 @@ module.exports.createMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  //Уточнить ID
-  Movie.findById(req.params.id)
+  Movie.findById(req.params._id)
     .then((movie) => {
       if (!movie) {
         throw new PageNotFoundError('Такой карточки нет в базе данных');
       } else if (movie.owner.toString() !== req.user._id) {
         throw new ForbidError('Недостаточно прав для удаления');
       } else {
-        Movie.findByIdAndRemove(req.params.id).then(() => res.send(movie));
+        return movie.remove().then(() => res.status(200).send(movie)).cathc(next);
       }
     })
     .catch((err) => {

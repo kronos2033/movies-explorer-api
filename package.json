@@ -1,7 +1,8 @@
 {
   "name": "diplom-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "server for the Yandex deployment project application",
+  "author": "Alexandr Mykovnya - github",
   "main": "npm.js",
   "scripts": {
     "start": "node app.js",
@@ -9,7 +10,6 @@
     "lint": "npx eslint ."
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -17,15 +17,17 @@
     "celebrate": "^14.0.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
-    "eslint": "^7.27.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.23.4",
     "express": "^4.17.1",
+    "express-winston": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.12",
-    "validator": "^13.6.0"
+    "validator": "^13.6.0",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4"
   }
 }

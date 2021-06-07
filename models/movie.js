@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const user = require('./user');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -50,7 +49,7 @@ const movieSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: user,
+    ref: 'user',
   },
   movieId: {
     type: Number,
